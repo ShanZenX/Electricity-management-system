@@ -1,0 +1,6 @@
+<!-- <div className="w-full flex justify-center mt-2">
+    <Routes>
+        <Route path="chart" element={<DataChart />} />
+        <Route path="table" element={<Table />} />
+    </Routes>
+</div> -->
