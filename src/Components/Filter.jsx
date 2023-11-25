@@ -39,9 +39,9 @@ export default function Filter() {
   useEffect(() => getData(), []);
 
   return (
-    <div className="flex flex-col  justify-center items-center  rounded shadow  m-2 p-2 w-full ">
+    <div className="flex flex-col  justify-center items-center    m-2 p-2 w-full ">
       <form
-        className="flex  h-3/4 w-3/4 pl-24  gap-5 items-center"
+        className="flex  h-14    gap-5 items-center justify-center"
         onSubmit={handleForm}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -61,9 +61,7 @@ export default function Filter() {
             onChange={handelSubmitEnd}
           />
         </LocalizationProvider>
-        <button type="submit" className=" ml-60">
-          <ColorSaveBtn name="Search" />
-        </button>
+        <ColorSaveBtn name="Search" />
       </form>
     </div>
   );

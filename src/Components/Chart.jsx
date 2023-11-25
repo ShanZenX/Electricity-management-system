@@ -17,8 +17,8 @@ export default function DataChart() {
       {chartData ? (
         <div className="flex justify-center items-center w-full overflow-scroll">
           <BarChart
-            width={1100}
-            height={500}
+            width={1200}
+            height={600}
             series={[
               {
                 data: chartData.map((data) => Number(data.number)),

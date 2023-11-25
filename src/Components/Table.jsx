@@ -22,10 +22,10 @@ export default function DataTable() {
   const tableHeading = ["Date", "Reading"];
 
   return (
-    <div className="w-full justify-center flex pb-4">
+    <div className="w-full justify-center flex pb-4 pt-6">
       <div className="w-5/6">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 490 }}>
+          <TableContainer sx={{ maxHeight: 550 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow className="border-2 border-black">
