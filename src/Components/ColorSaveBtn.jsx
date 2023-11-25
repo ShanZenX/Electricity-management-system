@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 
-export default function ColorSaveBtn({ props }) {
+export default function ColorSaveBtn({ name }) {
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(grey[800]),
     backgroundColor: grey[900],
@@ -12,8 +12,8 @@ export default function ColorSaveBtn({ props }) {
     },
   }));
   return (
-    <ColorButton variant="contained" type="submit" className="w-10">
-      Save
+    <ColorButton variant="contained" type="submit">
+      {name}
     </ColorButton>
   );
 }

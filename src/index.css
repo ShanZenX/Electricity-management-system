@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.my-shadow {
+    box-shadow: rgb(149 157 165 / 23%) 0px 0px 8px 1px;
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
+    color: black !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border: gray 1px solid ! important;
+}

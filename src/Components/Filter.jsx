@@ -4,18 +4,26 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ColorSaveBtn from "./ColorSaveBtn";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import "../index.css";
 
 export default function Filter() {
-  const [startDate, setStartDate] = useState([]);
-  const [EndDate, setEndDate] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [EndDate, setEndDate] = useState("");
   const [tableData, setTableData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted");
+    setStartDate("");
+    setEndDate("");
+  };
 
   const handelSubmitStart = (selectedDate) => {
     const format = selectedDate.format("YYYY-MM-DD");
     setStartDate(format);
   };
+
   const handelSubmitEnd = (selectedDate) => {
     const format = selectedDate.format("YYYY-MM-DD");
     setEndDate(format);
@@ -24,33 +32,38 @@ export default function Filter() {
   const getData = () => {
     fetch("http://localhost:3006/ebData")
       .then((res) => res.json())
-      .then((data) => setTableData(data));
+      .then((data) => setTableData(data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => getData(), []);
 
   return (
-    <div className="flex h-full flex-col w-full justify-center items-center ">
-      <form className="flex  flex-col h-2/4 w-3/6 justify-center gap-5 items-center bg-white rounded-xl shadow-lg">
-        <h1 className="m-3 font-serif text-2xl">Select the date </h1>
+    <div className="flex flex-col  justify-center items-center  rounded shadow  m-2 p-2 w-full ">
+      <form
+        className="flex  h-3/4 w-3/4 pl-24  gap-5 items-center"
+        onSubmit={handleForm}
+      >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             required
-            className="bg-white w-3/6 rounded-md"
+            className="bg-white rounded-md "
             label="Start Date"
+            value={startDate}
             onChange={handelSubmitStart}
           />
-          <h1 className="font-thin">|</h1>
+          <h1 className="font-thin">-</h1>
           <DatePicker
             required
-            className="bg-white w-3/6 rounded-md"
+            className="bg-white rounded-md "
             label="End Date"
+            value={EndDate}
             onChange={handelSubmitEnd}
           />
         </LocalizationProvider>
-        <Link>
-          <ColorSaveBtn />
-        </Link>
+        <button type="submit" className=" ml-60">
+          <ColorSaveBtn name="Search" />
+        </button>
       </form>
     </div>
   );

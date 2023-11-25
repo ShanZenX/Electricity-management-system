@@ -11,10 +11,11 @@ export default function AddReading() {
 
   const postApi = "http://localhost:3006/ebData";
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const requestBody = {
-      id: date.format("YYYY-MM-DD"),
-      date: date.format("YYYY-MM-DD"),
+      id: date?.format("YYYY-MM-DD"),
+      date: date?.format("YYYY-MM-DD"),
       number: reading,
     };
 
@@ -24,22 +25,27 @@ export default function AddReading() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
-    }).then(() => console.log("send", requestBody));
+    })
+      .then(console.log("send", requestBody), setDate(null), setReading(null))
+      .catch((err) => console.log(err));
+
+    setReading("");
   };
 
   return (
     <div className="w-full justify-center items-center h-screen flex flex-col">
       <form
-        className="w-2/4 h-3/6 bg-white rounded-xl flex flex-col items-center justify-center gap-8 shadow-lg"
+        className="w-2/4 h-3/6 bg-white rounded flex flex-col items-center justify-center gap-8 my-shadow"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl font-serif">Add Electric Reading</h1>
+        <h1 className="text-2xl font-bold">Add Electric Reading</h1>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             required
             className="bg-white w-3/6 rounded-md"
             label="Select Date"
             onChange={(selectedDate) => setDate(selectedDate)}
+            value={date}
           />
         </LocalizationProvider>
         <TextField
@@ -48,9 +54,10 @@ export default function AddReading() {
           className="w-3/6 bg-white rounded-md"
           type="number"
           required
+          value={reading}
           onChange={(e) => setReading(e.target.value)}
         />
-        <ColorSaveBtn />
+        <ColorSaveBtn name="Save" />
       </form>
     </div>
   );

@@ -13,17 +13,19 @@ export default function DataTable() {
   const getData = () => {
     fetch("http://localhost:3006/ebData")
       .then((res) => res.json())
-      .then((data) => setTableData(data));
+      .then((data) => setTableData(data))
+      .catch((err) => console.log(err));
   };
 
-  useEffect(() => getData(), []);
+  useEffect(getData, []);
+
   const tableHeading = ["Date", "Reading"];
 
   return (
-    <div className="w-full justify-center flex">
+    <div className="w-full justify-center flex pb-4">
       <div className="w-5/6">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 540 }}>
+          <TableContainer sx={{ maxHeight: 490 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow className="border-2 border-black">
