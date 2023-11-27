@@ -6,8 +6,8 @@ import { TextField } from "@mui/material";
 import ColorSaveBtn from "./ColorSaveBtn";
 
 export default function AddReading() {
-  const [date, setDate] = useState();
-  const [reading, setReading] = useState();
+  const [date, setDate] = useState("");
+  const [reading, setReading] = useState("");
 
   const postApi = "http://localhost:3006/ebData";
 
@@ -54,8 +54,8 @@ export default function AddReading() {
           className="w-3/6 bg-white rounded-md"
           type="number"
           required
-          value={reading}
           onChange={(e) => setReading(e.target.value)}
+          value={reading}
         />
         <ColorSaveBtn name="Save" />
       </form>

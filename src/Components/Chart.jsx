@@ -13,12 +13,12 @@ export default function DataChart() {
 
   useEffect(() => getData(), []);
   return (
-    <div>
+    <div className="h-full">
       {chartData ? (
-        <div className="flex justify-center items-center w-full overflow-scroll">
+        <div className="flex justify-center items-center w-full">
           <BarChart
             width={1200}
-            height={600}
+            height={550}
             series={[
               {
                 data: chartData.map((data) => Number(data.number)),
@@ -33,8 +33,10 @@ export default function DataChart() {
           />
         </div>
       ) : (
-        <div className="flex justify-center items-center h-full">
-          <h1>Search for the Reading</h1>
+        <div className="flex justify-center items-center h-full -mt-6">
+          <h1 className="bg-gray-200 font-sans font-bold p-16 rounded-md">
+            Uh-oh! Our server is on a break. Check back later!
+          </h1>
         </div>
       )}
     </div>

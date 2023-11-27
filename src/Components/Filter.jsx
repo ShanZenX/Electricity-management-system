@@ -39,18 +39,19 @@ export default function Filter() {
   useEffect(() => getData(), []);
 
   return (
-    <div className="flex flex-col  justify-center items-center    m-2 p-2 w-full ">
+    <div className="flex flex-col  justify-center items-center m-2  w-full ">
       <form
-        className="flex  h-14    gap-5 items-center justify-center"
+        className="flex gap-5 items-center h-12 justify-center"
         onSubmit={handleForm}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             required
-            className="bg-white rounded-md "
+            className="bg-white rounded-md"
             label="Start Date"
             value={startDate}
             onChange={handelSubmitStart}
+            slotProps={{ textField: { size: "small" } }}
           />
           <h1 className="font-thin">-</h1>
           <DatePicker
@@ -59,6 +60,7 @@ export default function Filter() {
             label="End Date"
             value={EndDate}
             onChange={handelSubmitEnd}
+            slotProps={{ textField: { size: "small" } }}
           />
         </LocalizationProvider>
         <ColorSaveBtn name="Search" />
