@@ -4,39 +4,40 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ColorSaveBtn from "./ColorSaveBtn";
 import { useEffect } from "react";
-import "../index.css";
 
-export default function Filter() {
+export default function Filter({ filteredData }) {
   const [startDate, setStartDate] = useState("");
   const [EndDate, setEndDate] = useState("");
-  const [tableData, setTableData] = useState([]);
-  const [FilteredData, setFilteredData] = useState([]);
-
-  const handleForm = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted");
-    setStartDate("");
-    setEndDate("");
-  };
-
-  const handelSubmitStart = (selectedDate) => {
-    const format = selectedDate.format("YYYY-MM-DD");
-    setStartDate(format);
-  };
-
-  const handelSubmitEnd = (selectedDate) => {
-    const format = selectedDate.format("YYYY-MM-DD");
-    setEndDate(format);
-  };
+  const [data, setData] = useState("");
 
   const getData = () => {
     fetch("http://localhost:3006/ebData")
       .then((res) => res.json())
-      .then((data) => setTableData(data))
+      .then((data) => setData(data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => getData(), []);
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const filterData = data.filter(
+      (item) => item.id >= startDate && item.id <= EndDate
+    );
+
+    console.log(filterData);
+    filteredData(filterData);
+  };
+
+  const handleSubmitStart = (selectedDate) => {
+    const format = selectedDate.format("YYYY-MM-DD");
+    setStartDate(format);
+  };
+
+  const handleSubmitEnd = (selectedDate) => {
+    const format = selectedDate.format("YYYY-MM-DD");
+    setEndDate(format);
+  };
 
   return (
     <div className="flex flex-col  justify-center items-center m-2  w-full ">
@@ -50,7 +51,7 @@ export default function Filter() {
             className="bg-white rounded-md"
             label="Start Date"
             value={startDate}
-            onChange={handelSubmitStart}
+            onChange={handleSubmitStart}
             slotProps={{ textField: { size: "small" } }}
           />
           <h1 className="font-thin">-</h1>
@@ -59,7 +60,7 @@ export default function Filter() {
             className="bg-white rounded-md "
             label="End Date"
             value={EndDate}
-            onChange={handelSubmitEnd}
+            onChange={handleSubmitEnd}
             slotProps={{ textField: { size: "small" } }}
           />
         </LocalizationProvider>

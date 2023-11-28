@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 export default function SideBar() {
   return (
     <div className="flex flex-col justify-center items-center h-full">
-      <div className=" bg-slate-400 w-44 h-full flex flex-col items-center justify-center text-white">
-        <ul className="bg-slate-600 rounded p-5  text-black">
-          <li className="flex justify-center bg-gray-200 mb-2 p-2">
+      <div className=" bg-gray-400 w-44 h-full flex flex-col items-center justify-center text-white font-sans">
+        <ul className="bg-gray-600 rounded p-5  text-black">
+          <li className="flex justify-center bg-gray-200 mb-2 p-2 rounded">
             <Link to="/">Home </Link>
           </li>
-          <li className="flex justify-center bg-gray-200 mb-2 p-2">
+          <li className="flex justify-center bg-gray-200 mb-2 p-2 rounded">
             <Link to="add">Add Reading </Link>
           </li>
-          <li className="flex justify-center bg-gray-200  p-2">
+          <li className="flex justify-center bg-gray-200  p-2 rounded">
             <Link to="dashboard">Dashboard </Link>
           </li>
         </ul>

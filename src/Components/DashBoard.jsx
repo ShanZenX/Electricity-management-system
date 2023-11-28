@@ -4,13 +4,20 @@ import { Routes, Route, Link } from "react-router-dom";
 import DataChart from "./Chart";
 import DataTable from "./Table";
 import Filter from "./Filter";
+import { useState } from "react";
 
-export default function Dashboard({ Data }) {
+export default function Dashboard() {
+  const [data, setData] = useState("");
+
+  const handleFilterData = (data) => {
+    setData(data);
+    console.log(data);
+  };
   return (
     <div className="w-full h-screen flex flex-col">
       <div className="flex h-full flex-col   bg-white  text-black m-2 rounded items-center">
-        <div className="flex flex-col items-center justify-between shadow-md m-2 bg-gray-200 ">
-          <Filter />
+        <div className="flex flex-col items-center justify-between my-shadow m-2 bg-gray-200 ">
+          <Filter filteredData={handleFilterData} />
         </div>
         <div className="bg-slate-500  m-3 p-3 ">
           <Link to="Chart" className="bg-gray-200 p-2 m-1">
@@ -21,8 +28,8 @@ export default function Dashboard({ Data }) {
           </Link>
         </div>
         <Routes>
-          <Route path="*" element={<DataChart />} />
-          <Route path="table" element={<DataTable />} />
+          <Route path="*" element={<DataChart data={data} />} />
+          <Route path="table" element={<DataTable data={data} />} />
         </Routes>
       </div>
     </div>

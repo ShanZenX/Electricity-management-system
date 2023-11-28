@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,23 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export default function DataTable() {
-  const [tableData, setTableData] = useState();
-
-  const getData = () => {
-    fetch("http://localhost:3006/ebData")
-      .then((res) => res.json())
-      .then((data) => setTableData(data))
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(getData, []);
-
+export default function DataTable({ data }) {
   const tableHeading = ["Date", "Reading"];
 
   return (
     <div className="w-full justify-center flex pb-4 pt-4 h-full">
-      {tableData ? (
+      {data ? (
         <div className="w-5/6">
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 500 }}>
@@ -43,7 +32,7 @@ export default function DataTable() {
                 </TableHead>
 
                 <TableBody>
-                  {tableData.map((data) => (
+                  {data.map((data) => (
                     <TableRow key={data.id} className="w-full">
                       <TableCell align="center" className="w-3/6 border">
                         {data.date}
@@ -62,7 +51,7 @@ export default function DataTable() {
       ) : (
         <div className="flex justify-center items-center h-full -mt-6">
           <h1 className="bg-gray-200 font-sans font-bold p-16 rounded-md">
-            Uh-oh! Our server is on a break. Check back later!
+            Please select a filter to view data{" "}
           </h1>
         </div>
       )}

@@ -28,7 +28,6 @@ export default function AddReading() {
     })
       .then(console.log("send", requestBody), setDate(null), setReading(null))
       .catch((err) => console.log(err));
-
     setReading("");
   };
 
