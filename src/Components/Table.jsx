@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,16 +6,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { DashboardContext } from "../contexts/DashboardContext";
 
-export default function DataTable({ data }) {
-  const tableHeading = ["Date", "Reading"];
+export default function DataTable() {
+  const data = useContext(DashboardContext);
+  console.log(data);
 
+  const tableHeading = ["Date", "Reading", "Change"];
+  const handelClick = (e, index) => {
+    console.log("value ", index);
+  };
   return (
     <div className="w-full justify-center flex pb-4 pt-4 h-full">
       {data ? (
         <div className="w-5/6">
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            <TableContainer sx={{ maxHeight: 500 }}>
+            <TableContainer sx={{ maxHeight: 480 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow className="border-2 border-black">
@@ -32,14 +38,22 @@ export default function DataTable({ data }) {
                 </TableHead>
 
                 <TableBody>
-                  {data.map((data) => (
-                    <TableRow key={data.id} className="w-full">
+                  {data.map((item, index) => (
+                    <TableRow key={item.id} className="w-full">
                       <TableCell align="center" className="w-3/6 border">
-                        {data.date}
+                        {item.date}
                       </TableCell>
 
                       <TableCell align="center" className="flex border w-3/6">
-                        {data.number}
+                        {item.number}
+                      </TableCell>
+
+                      <TableCell align="center" className="flex border w-3/6">
+                        <button onClick={(e) => handelClick(e, index)}>
+                          {index > 0
+                            ? item.number - data[index - 1].number
+                            : ""}
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -51,7 +65,7 @@ export default function DataTable({ data }) {
       ) : (
         <div className="flex justify-center items-center h-full -mt-6">
           <h1 className="bg-gray-200 font-sans font-bold p-16 rounded-md">
-            Please select a filter to view data{" "}
+            Please select a filter to view stored data
           </h1>
         </div>
       )}

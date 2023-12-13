@@ -4,14 +4,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
 import ColorSaveBtn from "./ColorSaveBtn";
+import { readingAPI } from "../api/readingAPI";
 
 export default function AddReading() {
   const [date, setDate] = useState("");
   const [reading, setReading] = useState("");
 
-  const postApi = "http://localhost:3006/ebData";
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const requestBody = {
       id: date?.format("YYYY-MM-DD"),
@@ -19,16 +18,13 @@ export default function AddReading() {
       number: reading,
     };
 
-    fetch(postApi, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    })
-      .then(console.log("send", requestBody), setDate(null), setReading(null))
-      .catch((err) => console.log(err));
-    setReading("");
+    try {
+      await readingAPI.addReading(requestBody);
+      setDate(null);
+      setReading(null);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

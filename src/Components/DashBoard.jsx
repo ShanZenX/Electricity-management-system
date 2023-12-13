@@ -1,10 +1,11 @@
-// Dashboard.jsx
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import DataChart from "./Chart";
-import DataTable from "./Table";
+import { Routes, Route, Link, Outlet } from "react-router-dom";
 import Filter from "./Filter";
 import { useState } from "react";
+import { DashboardContext } from "../contexts/DashboardContext";
+import EntryCount from "./EntryCount";
+import DataChart from "./Chart";
+import DataTable from "./Table";
 
 export default function Dashboard() {
   const [data, setData] = useState("");
@@ -14,24 +15,28 @@ export default function Dashboard() {
     console.log(data);
   };
   return (
-    <div className="w-full h-screen flex flex-col">
-      <div className="flex h-full flex-col   bg-white  text-black m-2 rounded items-center">
-        <div className="flex flex-col items-center justify-between my-shadow m-2 bg-gray-200 ">
-          <Filter filteredData={handleFilterData} />
+    <DashboardContext.Provider value={data}>
+      <div className="w-full h-screen flex flex-col">
+        <div className="flex h-4/12  m-2 rounded ">
+          {/* <EntryCount title={"hi   hello hello   "} bgcolor="white" />
+          <EntryCount title={"hi   hello hello   "} bgcolor="white" />
+          <EntryCount title={"hi   hello hello   "} bgcolor="white" />
+          <EntryCount title={"hi   hello hello   "} bgcolor="white" /> */}
+
+          <Outlet />
         </div>
-        <div className="bg-slate-500  m-3 p-3 ">
-          <Link to="Chart" className="bg-gray-200 p-2 m-1">
-            Chart
-          </Link>
-          <Link to="table" className="bg-gray-200 p-2 m-1">
-            Table
-          </Link>
+        <div className="h-full flex flex-col">
+          <div className="h-1/6 items-center flex">
+            <Filter filteredData={handleFilterData} />
+          </div>
+          <div className="h-5/6 flex">
+            <div className="w-3/6">{<DataChart />}</div>
+            <div className="w-3/6">
+              <DataTable />
+            </div>
+          </div>
         </div>
-        <Routes>
-          <Route path="*" element={<DataChart data={data} />} />
-          <Route path="table" element={<DataTable data={data} />} />
-        </Routes>
       </div>
-    </div>
+    </DashboardContext.Provider>
   );
 }
