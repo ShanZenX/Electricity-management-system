@@ -19,11 +19,12 @@ function App() {
   return (
     <ContextToggle.Provider value={{ theme, handleToggle }}>
       <BrowserRouter>
-        <div className="flex main" id={theme}>
+        <div className="flex main " id={theme}>
           <div>
             <SideBar />
           </div>
           <div className="w-full ">
+            {/* routes */}
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/add" element={<AddReading />}></Route>
