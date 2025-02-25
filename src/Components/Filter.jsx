@@ -43,7 +43,7 @@ export default function Filter({ filteredData }) {
   return (
     <div className="flex flex-col justify-center items-center m-2 w-full">
       <form
-        className="flex gap-5 items-center h-12 justify-center"
+        className="flex  bg-white p-10 rounded-md   items-center h-12 justify-evenly"
         onSubmit={handleForm}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -65,7 +65,7 @@ export default function Filter({ filteredData }) {
             slotProps={{ textField: { size: "small" } }}
           />
         </LocalizationProvider>
-        <ColorSaveBtn name="Search" />
+        <ColorSaveBtn  name="Search" />
       </form>
     </div>
   );

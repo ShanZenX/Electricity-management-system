@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .my-shadow {
-    box-shadow: rgb(149 157 165 / 23%) 0px 0px 8px 1px;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 8px 1px;
 }
 
 .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-error {

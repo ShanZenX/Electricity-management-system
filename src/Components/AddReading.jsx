@@ -5,9 +5,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
 import ColorSaveBtn from "./ColorSaveBtn";
 import { readingAPI } from "../api/readingAPI";
+import eb from "./eb.png";
 
 export default function AddReading() {
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(null);
   const [reading, setReading] = useState("");
 
   const handleSubmit = async (e) => {
@@ -21,19 +22,19 @@ export default function AddReading() {
     try {
       await readingAPI.addReading(requestBody);
       setDate(null);
-      setReading(null);
+      setReading("");
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="w-full justify-center items-center h-screen flex flex-col">
+    <div className="w-full justify-center items-center h-screen flex">
       <form
-        className="w-2/4 h-3/6 bg-white rounded flex flex-col items-center justify-center gap-8 my-shadow"
+        className="w-1/2 h-3/6 bg-white m-20 rounded flex flex-col items-center justify-center gap-8 my-shadow"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl font-bold">Add Electric Reading</h1>
+        <h1 className="text-2xl font-bold text-black">Add Electric Reading</h1>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             required
@@ -41,6 +42,16 @@ export default function AddReading() {
             label="Select Date"
             onChange={(selectedDate) => setDate(selectedDate)}
             value={date}
+            sx={{
+              "& label": { color: "black" }, // Default label color
+              "& .MuiInputLabel-root.Mui-focused": { color: "black" }, // Label turns blue when active
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "black" }, // Default border color
+                "&:hover fieldset": { borderColor: "black" },
+                "&.Mui-focused fieldset": { borderColor: "black" }, // Border turns blue when focused
+              },
+              "& input": { color: "black" }, // Input text color
+            }}
           />
         </LocalizationProvider>
         <TextField
@@ -51,9 +62,22 @@ export default function AddReading() {
           required
           onChange={(e) => setReading(e.target.value)}
           value={reading}
+          sx={{
+            "& label": { color: "black" }, // Default label color
+            "& .MuiInputLabel-root.Mui-focused": { color: "black" }, // Label turns blue when active
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": { borderColor: "black" }, // Default border color
+              "&:hover fieldset": { borderColor: "black" },
+              "&.Mui-focused fieldset": { borderColor: "black" }, // Border turns blue when focused
+            },
+            "& input": { color: "black" }, // Input text color
+          }}
         />
         <ColorSaveBtn name="Save" />
       </form>
+      <div className="w-1/2">
+        <img src={eb} alt="eb" className="w-5/6" />
+      </div>
     </div>
   );
 }

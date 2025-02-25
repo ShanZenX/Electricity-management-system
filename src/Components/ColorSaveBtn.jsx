@@ -5,14 +5,14 @@ import { grey } from "@mui/material/colors";
 
 export default function ColorSaveBtn({ name }) {
   const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(grey[800]),
-    backgroundColor: grey[900],
+    color: theme.palette.getContrastText("#f3df6d"),
+    backgroundColor: "#f3df6d",
     "&:hover": {
-      backgroundColor: grey[700],
+      backgroundColor: "#f3df6d",
     },
   }));
   return (
-    <ColorButton variant="contained" type="submit">
+    <ColorButton variant="outlined" type="submit" className="!ml-2 h-[40px] !border-black shadow !shadow-white">
       {name}
     </ColorButton>
   );

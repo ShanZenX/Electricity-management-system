@@ -11,7 +11,7 @@ import DataTable from "./Components/Table";
 export const ContextToggle = createContext(null);
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   const handleToggle = () => {
     setTheme((cur) => (cur === "light" ? "dark" : "light"));
@@ -19,11 +19,11 @@ function App() {
   return (
     <ContextToggle.Provider value={{ theme, handleToggle }}>
       <BrowserRouter>
-        <div className="flex main " id={theme}>
+        <div className="flex flex-col main " id={theme}>
           <div>
             <SideBar />
           </div>
-          <div className="w-full ">
+          <div className="w-full h-[720px]">
             {/* routes */}
             <Routes>
               <Route path="/" element={<Home />}></Route>
